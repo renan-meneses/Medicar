@@ -17,14 +17,16 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from medico.api.viewsets import MedicoViewSet
+from especialidade.api.viewsets import EspecialidadeViewSet
 
 
 router = routers.DefaultRouter()
-router.register(r'medico', MedicoViewSet)
+router.register(r'medicos', MedicoViewSet)
+router.register(r'especialidades', EspecialidadeViewSet)
 
-router = routers.DefaultRouter()
 urlpatterns = [
+        path('', include(router.urls)),
+
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
-    # path('api-auth/', include('rest_framework.urls', namespace='medicar'))
+    path('api-auth/', include('rest_framework.urls', namespace='medicar'))
 ]

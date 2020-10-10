@@ -1,0 +1,4 @@
+./.gitignore
+*.pyc
+models.cpython-36.pyc
+admin.cpython-36.pyc
