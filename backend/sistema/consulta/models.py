@@ -22,7 +22,7 @@ def __str__(self):
 class Agenda(models.Model):
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
     dia = models.DateField(auto_now=False, auto_now_add=False)
-    horarios = models.ForeignKey(Horario, on_delete=models.CASCADE)
+    horarios = models.ManyToManyField(Horario)
 
 def __str__(self):
         return self.horarios
