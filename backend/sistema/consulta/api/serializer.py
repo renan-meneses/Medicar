@@ -5,18 +5,18 @@ from consulta.models import Agenda, Horario, Consulta
 class AgendaSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Medico
-        fields = ['id', 'medico', 'data', 'horarios']
+        model = Agenda
+        fields = ['id', 'medico.nome', 'data', 'horarios']
 
 
 class HorarioSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Medico
-        fields = ['id',horario]
+        model = Horario
+        fields = ['id','horario']
 
 class AgendaSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Medico
+        model = Consulta
         fields = ['id', 'medico', 'data', 'horarios']

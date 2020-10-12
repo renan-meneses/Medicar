@@ -8,6 +8,8 @@ class Medico(models.Model):
      especialidade = models.ForeignKey(Especialidade, on_delete=models.CASCADE)
 
 
+def __unicode__(self):
+     return self.nome
 
 def __str__(self):
-      return self.especialidade,nome
+      return self,nome

@@ -5,6 +5,6 @@ from .serializer import MedicoSerializer
 
 class MedicoViewSet(viewsets.ModelViewSet):
 
-    queryset = Medico.objects.all()
+    queryset = Medico.objects.all().order_by('nome')
     serializer_class = MedicoSerializer
     permission_classes = [permissions.IsAuthenticated]

@@ -5,6 +5,6 @@ from consulta.models import Agenda, Horario, Consulta, Medico
 
 class AgendaViewSet(viewsets.ModelViewSet):
 
-    queryset = Agenda.objects.all()
+    queryset = Agenda.objects.all().order_by('data')
     serializer_class = AgendaSerializer
     permission_classes = [permissions.IsAuthenticated]
