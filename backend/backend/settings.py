@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
     "drf_yasg",
+    "controller.user",
+    "controller.clinic"
     
 ]
 
@@ -140,3 +142,10 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=4),
     "REFRESH_TOKEN_LIFETIME": timedelta(minutes=60),
 }
+
+SWAGGER_SETTINGS = {
+   'USE_SESSION_AUTH': False
+   
+}
+
+AUTH_USER_MODEL = 'user.User'

@@ -1,25 +1,16 @@
-"""
-URL configuration for backend project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 
 from django.contrib import admin
-from django.urls import path, include
 from drf_yasg import openapi
+from rest_framework import routers
+from django.urls import path, include
 from drf_yasg.views import get_schema_view
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework.permissions import AllowAny
+from controller.user.views import UserViewSet
+from controller.clinic.views import (
+    SpecialtyViewSet, DoctorViewSet,
+    AgendaViewSet, MedicalAppointmentViewSet
+)
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -27,23 +18,31 @@ schema_view = get_schema_view(
         default_version="v1",
         description="Sistema voltado a gerenciamento de clinica medica",
         terms_of_service="https://www.google.com/policies/terms/",
-        #   contact=openapi.Contact(email="contact@snippets.local"),    # noqa: E800
-        #   license=openapi.License(name="BSD License"),    # noqa: E800
+        contact=openapi.Contact(email="suport@medicar.com"),    # noqa: E800
+        license=openapi.License(name="BSD License"),    # noqa: E800
     ),
     public=True,
-    #    permission_classes=[permissions.AllowAny],)    # noqa: E800
+    permission_classes=(AllowAny,), 
+
 )
 
-
+router = routers.DefaultRouter()
+router.register('users', UserViewSet)
+router.register('especialidades', SpecialtyViewSet)
+router.register('medicos', DoctorViewSet)
+router.register('agendas', AgendaViewSet)
+router.register('consultas', MedicalAppointmentViewSet)
 
 urlpatterns = [
-    path("conmander/", admin.site.urls),
+    path("controller/", admin.site.urls),
     path("api/signin/", TokenObtainPairView.as_view()),
     path("api/token/refresh/", TokenRefreshView.as_view()),
     path(
-        "api/docs/",
+        "swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
+    path('', include(router.urls)),
+
 
 ]
