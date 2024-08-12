@@ -23,9 +23,10 @@ export class MainService {
     return this.http.post<User>(`${this.url}/users/`, data);
   }
 
-  login(credentials: { username: string, password: string }): Observable<object> {
-    return this.http.post<{token: string}>(`${this.url}/api-token-auth/`, credentials);
+  login(credentials: { username: string, password: string }): Observable<{ token: string, name: string }> {
+    return this.http.post<{ token: string, name: string }>(`${this.url}/api/signin/`, credentials);
   }
+  
 
   logout() {
     localStorage.removeItem("token");

@@ -1,6 +1,4 @@
-import { UUID } from "crypto";
-
 export interface Specialty{
-    _id: UUID;
+    _id: number;
     name: string;
 }

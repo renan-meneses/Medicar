@@ -1,8 +1,7 @@
-import { UUID } from "crypto";
 import { Doctor } from "./doctor";
 
 export interface Consultation {
-    _id: UUID;
+    _id: number;
     name: string;
     day:string;
     hourly:string;
