@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MainService } from 'src/app/main.service';
+import { MainService } from '../../../../service/main.service';
 
 @Component({
   selector: 'app-consultation-create',
@@ -15,11 +15,11 @@ export class ConsultationCreateComponent implements OnInit {
   agendas = [];
   times = [];
 
-  consultation: object;
-  specialtie: object;
-  doctor: object;
-  agenda: object;
-  time: object;
+  consultation!: object;
+  specialtie!: object;
+  doctor!: object;
+  agenda!: object;
+  time!: object;
 
   createForm: FormGroup;
 
@@ -55,9 +55,16 @@ export class ConsultationCreateComponent implements OnInit {
   }
 
   onChangeAgenda(id: string) {
-    this.agenda = this.agendas.find(a => a.id === parseInt(id));
-    this.times = [...this.agenda['schedule']]
+    const selectedAgenda = this.agendas.find(a => a.id === parseInt(id));
+    if (selectedAgenda) {
+      this.agenda = selectedAgenda;
+      this.times = [...selectedAgenda.schedule]; // Acessa o campo `schedule` diretamente
+    } else {
+      console.error(`Agenda with id ${id} not found`);
+      this.times = [];
+    }
   }
+  
 
   onSubmit() {
     let data = {

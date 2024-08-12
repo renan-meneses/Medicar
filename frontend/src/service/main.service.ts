@@ -7,7 +7,7 @@ import { User } from '../app/components/interface/user';
 import { Specialty } from '../app/components/interface/specialty';
 import { Doctor } from '../app/components/interface/doctor';
 import { Consultation } from '../app/components/interface/consultation'
-
+import { Agenda } from '../app/components/interface/agenda';
 
 @Injectable({
   providedIn: 'root'
@@ -33,31 +33,31 @@ export class MainService {
     this.router.navigate(["login"]);
   }
 
-  // specialties
   getSpecialties(): Observable<Specialty[]> {
     return this.http.get<Specialty[]>(`${this.url}/especialidades/`);
   }
 
-  // doctors
   getDoctorsFilterSpecialties(specialtyId: number): Observable<Doctor[]> {
     return this.http.get<Doctor[]>(`${this.url}/medicos/?specialty=${specialtyId}`);
   }
 
-  // agendas
-  getAgendasFilterDoctors(doctorId: number): Observable<object[]> {
-    return this.http.get<object[]>(`${this.url}/agendas/?doctor=${doctorId}`);
+  getAgendasFilterDoctors(doctorId: number): Observable<Agenda[]> {
+    return this.http.get<Agenda[]>(`${this.url}/agendas/?doctor=${doctorId}`);
   }
 
-  // consultations
-  postConsultations(data: object): Observable<object> {
-    return this.http.post<object>(`${this.url}/consultas/`, data);
-  }
+  postConsultations(data: Consultation): Observable<Consultation> {
+    return this.http.post<Consultation>(`${this.url}/consultas/`, data);
+  }  
 
   getConsultations(): Observable<Consultation[]> {
-    return this.http.get<Consultation[]>(`${this.url}/consultas/`);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<Consultation[]>(`${this.url}/consultas/`, { headers });
   }
 
-  deleteConsultation(id: number) {
-    return this.http.delete<{}>(`${this.url}/consultas/${id}`);
-  }  
+  deleteConsultation(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/consultas/${id}`);
+  }
+   
 }

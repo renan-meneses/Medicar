@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MainService } from 'src/app/main.service';
+import { MainService } from '../../../../service/main.service';
 
 
 @Component({
