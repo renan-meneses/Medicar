@@ -1,0 +1,69 @@
+<div class="body-consultation">
+    <div class="consultation">
+        <div class="consultation-title">
+            <p class="title">Consulta Clínica</p>
+        </div>
+
+        <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+            <select 
+                class="selected-item" 
+                [ngClass]="{ visited: createForm.controls['specialty'].valid }"
+                (change)="onChangeSpecialty($event.target.value)"
+                id="specialty" 
+                formControlName="specialty"
+            >
+                <option [value]="null" disabled>Especialidade</option>
+                <option *ngFor="let specialty of specialties" [value]="specialty.id">
+                    {{ specialty.name }}
+                </option>
+            </select>
+
+            <select 
+                class="selected-item" 
+                [ngClass]="{ visited: createForm.controls['doctor'].valid }"
+                (change)="onChangeDoctor($event.target.value)"
+                id="doctor" 
+                formControlName="doctor"
+            >
+                <option [value]="null" disabled>Médico</option>
+                <option *ngFor="let doctor of doctors" [value]="doctor.id">
+                    {{ doctor.name }}
+                </option>
+            </select>
+
+            <select 
+                class="selected-item" 
+                [ngClass]="{ visited: createForm.controls['agenda'].valid }"
+                (change)="onChangeAgenda($event.target.value)"
+                id="agenda" 
+                formControlName="agenda"
+            >
+                <option [value]="null" disabled>Data</option>
+                <option *ngFor="let agenda of agendas" [value]="agenda.id">
+                    {{ agenda.day | date:'MM/dd/yyyy' }}
+                </option>
+            </select>
+
+            <select 
+                class="selected-item" 
+                [ngClass]="{ visited: createForm.controls['time'].valid }"
+                id="time" 
+                formControlName="time"
+            >
+                <option [value]="null" disabled>Hora</option>
+                <option *ngFor="let time of times" [value]="time">
+                    {{ time }}
+                </option>
+            </select>
+
+            <div class="btn-consultation">
+                <button class="btn btn-cancel" type="submit" routerLink="/home">
+                    Cancelar
+                </button>
+                <button class="btn btn-confirm" type="submit " [disabled]="!createForm.valid">
+                    Confirmar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,27 +1,46 @@
-# Frontend
+# Frontend - Medicar
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
+Este repositório contém o frontend da aplicação, desenvolvido com Angular.
 
-## Development server
+## Requisitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Node.js 18.x ou superior
+- npm (ou Yarn)
 
-## Code scaffolding
+## Configuração
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. **Instalar Dependências**
 
-## Build
+    ```bash
+    npm install
+    ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. **Rodar o Servidor de Desenvolvimento**
+    ```bash
+    npm start
+    ```
+    O aplicativo estará disponível em http://localhost:4200.
 
-## Running unit tests
+## Construção
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para criar uma versão de produção do aplicativo:
+```bash
+npm run build --prod
+```
+Os arquivos de build serão gerados na pasta dist/.
 
-## Running end-to-end tests
+## Docker
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Para construir e rodar o frontend com Docker:
 
-## Further help
+1. **Construir a Imagem Docker**
+    ```bash
+        docker build -t meu-frontend-angular .
+ 
+    ```
+2. **Rodar o Contêiner**    
+    ```bash
+    docker run -p 80:80 meu-frontend-angular
+    ```
+Acesse o aplicativo em http://localhost:80.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
